@@ -1,0 +1,25 @@
+apiVersion: kops.k8s.io/v1alpha2
+kind: InstanceGroup
+metadata:
+  creationTimestamp: null
+  labels:
+    kops.k8s.io/cluster: <NAME>
+  name: nodes-spot-1
+spec:
+  cloudLabels:
+    k8s.io/cluster-autoscaler/<NAME>: "1"
+    k8s.io/cluster-autoscaler/enabled: "1"
+  image: 099720109477/ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-20220404
+  instanceMetadata:
+    httpPutResponseHopLimit: 1
+    httpTokens: required
+  machineType: t3a.small
+  maxSize: 10
+  minSize: 1
+  rootVolumeSize: 30
+  rootVolumeType: gp3
+  nodeLabels:
+    kops.k8s.io/instancegroup: nodes-ondemand-1
+  role: Node
+  subnets:
+  - <SUBNETS>
